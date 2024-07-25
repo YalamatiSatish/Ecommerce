@@ -1,0 +1,7 @@
+#Environments
+.venv
+myvenv/
+env/
+ENV/
+env.bak/
+myvenv.bak/

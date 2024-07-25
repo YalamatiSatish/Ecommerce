@@ -1,0 +1,90 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './index.scss';
+
+declare module '@mui/material/styles' {
+    interface CommonColors {
+        customColor1: string;
+        customColor2: string;
+        customColor3: string;
+        customColor4: string;
+        customColor5: string;
+        customColor6: string;
+        customColor7: string;
+        customColor8: string;
+        customColor9: string;
+        customColor10: string;
+        customColor11: string;
+        customColor12: string;
+    }
+  }
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: '#0076a8',
+			light: '#EDF4f7',
+			// light: will be calculated from palette.primary.main,
+			// dark: will be calculated from palette.primary.main,
+			// contrastText: will be calculated to contrast with palette.primary.main
+		},
+		secondary: {
+			main: '#E0C2FF',
+			light: '#F5EBFF',
+			// dark: will be calculated from palette.secondary.main,
+			contrastText: '#47008F',
+		},
+		common: {
+			white: '#FFFFFF',
+			black: '#454d56',
+			customColor1: '#c2e2f0',
+			customColor2: '#00354c',
+			customColor3: '#fafafb',
+			customColor4: '#E3E5E8',
+			customColor5: '#00121A',
+			customColor6: '#8CD4F2',
+			customColor7: '#0092D1',
+			customColor8: '#007DB3',
+			customColor9: '#005980',
+			customColor10: '#EFDBE2',
+			customColor11: '#FFF0059',
+			customColor12: '#F8FCFF',
+		},
+	},
+	typography: {
+		fontFamily: ['Titillium Web', 'Roboto Mono' ].join(','),
+	},
+	components: {
+		MuiContainer: {
+			styleOverrides: {
+				root: {
+					maxWidth: '100%',
+					paddingLeft: '40px !important',
+					paddingRight: '40px !important',
+				},
+			},
+		},
+	},
+});
+
+const ThemeWrapper = () => (
+	<ThemeProvider theme={theme}>
+		<App />
+	</ThemeProvider>
+);
+
+root.render(
+	process.env.NODE_ENV === 'development' ? (
+		<ThemeWrapper />
+	) : (
+		<React.StrictMode>
+			<ThemeWrapper />
+		</React.StrictMode>
+	),
+);
+
