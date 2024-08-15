@@ -16,6 +16,7 @@ export interface RouteProps {
     isLoggedIn: boolean;
 }
 
+
 export interface productType {
     _id: string;
     name: string;
@@ -27,4 +28,9 @@ export interface productType {
     countInStock: number;
     rating: number;
     numReviews: number;
+};
+
+export interface OptionType {
+    label: string;
+    value: number;
 };

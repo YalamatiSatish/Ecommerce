@@ -10,27 +10,27 @@ import { productType } from '../../types';
 import { Link } from 'react-router-dom';
 
 interface ProductsType {
-	key: string;
+	key?: string;
 	product: productType;
 }
 
-const Products = ({ product, key }: ProductsType) => {
+const Products = ({ product, }: ProductsType) => {
 	return (
-		<Box key={key}>
+		<Box key={product._id}>
 			{' '}
-			<Card sx={{ maxWidth: 345, padding: '20px', minHeight: '250px' }}>
+			<Card sx={{ maxWidth: 345, padding: '20px', minHeight: '250px', }}>
 				<CardActionArea>
 					<Link to={`/product/${product._id}`}>
 						<CardMedia
 							component='img'
 							//height='140'
-							image={product.image}
+							image={product.image }
 							alt={product.name}
 							sx={{ minHeight: 100 }}
 						/>
 					</Link>
 					<CardContent sx={{ minHeight: '150px' }}>
-						<Typography gutterBottom variant='h5' component='div'>
+						<Typography gutterBottom variant='h5' component='div' sx={{ minHeight:'60px' }} >
 							{product.name}
 						</Typography>
 						<Typography variant='body2' color='text.secondary'>

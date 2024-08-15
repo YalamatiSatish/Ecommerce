@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProductsList, fetchProduceDetail } from './thunk';
+import { fetchProductsList, fetchProductDetail } from './thunk';
 import { ProductsSlice } from '../../types/products';
 
 const initialState: ProductsSlice = {
@@ -34,6 +34,7 @@ export const productsSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(fetchProductsList.fulfilled, (state, { payload }) => {
+			console.log(payload, 'payload')
 			if (payload) {
 				state.products = payload;
 			}
@@ -48,16 +49,17 @@ export const productsSlice = createSlice({
 		});
 
 		// To get the detail of a single product
-		builder.addCase(fetchProduceDetail.pending, (state) => {
+		builder.addCase(fetchProductDetail.pending, (state) => {
 			state.loading = 'loading';
 		});
-		builder.addCase(fetchProduceDetail.fulfilled, (state, { payload }) => {
+		builder.addCase(fetchProductDetail.fulfilled, (state, { payload }) => {
+			console.log(state.loading, 'check', payload)
 			if (payload) {
 				state.product = payload;
 			}
 			state.loading = 'succeeded';
 		});
-		builder.addCase(fetchProduceDetail.rejected, (state, action) => {
+		builder.addCase(fetchProductDetail.rejected, (state, action) => {
 			const payload = action.payload as ProductsSlice;
 			if (payload) {
 				state.error = payload?.error || null;

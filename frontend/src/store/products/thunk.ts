@@ -20,7 +20,7 @@ export const fetchProductsList = createAsyncThunk(
 	},
 );
 
-export const fetchProduceDetail =  createAsyncThunk(
+export const fetchProductDetail =  createAsyncThunk(
 	'productDetail',
 	async(productId:number, { signal, rejectWithValue } ) => {
 		try {
