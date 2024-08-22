@@ -5,30 +5,30 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './index.scss';
 
 declare module '@mui/material/styles' {
-    interface CommonColors {
-        customColor1: string;
-        customColor2: string;
-        customColor3: string;
-        customColor4: string;
-        customColor5: string;
-        customColor6: string;
-        customColor7: string;
-        customColor8: string;
-        customColor9: string;
-        customColor10: string;
-        customColor11: string;
-        customColor12: string;
-    }
-  }
+	interface CommonColors {
+		customColor1: string;
+		customColor2: string;
+		customColor3: string;
+		customColor4: string;
+		customColor5: string;
+		customColor6: string;
+		customColor7: string;
+		customColor8: string;
+		customColor9: string;
+		customColor10: string;
+		customColor11: string;
+		customColor12: string;
+	}
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
 
 const theme = createTheme({
 	palette: {
 		primary: {
 			main: '#0076a8',
 			light: '#EDF4f7',
+			dark:'#1e1e1e'
 			// light: will be calculated from palette.primary.main,
 			// dark: will be calculated from palette.primary.main,
 			// contrastText: will be calculated to contrast with palette.primary.main
@@ -57,7 +57,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: ['Titillium Web', 'Roboto Mono' ].join(','),
+		fontFamily: ['Titillium Web', 'Roboto Mono'].join(','),
 	},
 	components: {
 		MuiContainer: {
@@ -69,6 +69,15 @@ const theme = createTheme({
 				},
 			},
 		},
+		/* MuiInputBase: {
+			styleOverrides: {
+				input: {
+					WebkitTextSecurity: 'disc', // This will make sure it uses dots
+					MozTextSecurity: 'disc', // Firefox specific (but might not be necessary)
+					textSecurity: 'disc', // Standard (not widely supported yet)
+				},
+			},
+		}, */
 	},
 });
 
@@ -87,4 +96,3 @@ root.render(
 		</React.StrictMode>
 	),
 );
-

@@ -1,3 +1,4 @@
+
 export const productDetailMain = () => ({
 	padding: '20px 0px 0px 150px',
 	'@media (max-width:1024px)': {
@@ -49,9 +50,42 @@ export const productDetailImg = () => ({
 	'@media (max-width:1024px)': {
 		width: 'calc(100% -  12px)',
 		height: '10%',
-		padding:'6px',
+		padding: '6px',
 	},
 });
 
-
 //Cart
+// LogInScreen
+export const logInFormOuter = () => ({
+	display: 'flex',
+	flexDirection: 'column',
+	width: '350px',
+	paddingLeft: '140px',
+	marginTop: '20px',
+	'@media (max-width:1024px)': {
+		paddingLeft: '10px',
+	},
+});
+export const signInButtonStyle = () => ({
+	width: '150px',
+	backgroundColor: 'black',
+	marginTop: '10px',
+	height: '50px',
+	fontWeight: 'bold',
+	fontSize: '16px',
+	lineHeight: '40px',
+	/* '@media (max-width:1024px)': {
+		width:'300px',
+
+	}, */
+});
+
+// profileScreen
+export const profileFormOuter = () => ({
+	display: 'flex',
+	flexDirection: 'column',
+	width: '350px',
+	/* '@media (max-width:1024px)': {
+		paddingLeft: '10px',
+	}, */
+});

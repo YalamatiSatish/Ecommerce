@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Box, } from '@mui/material';
-import Header from './components/Header';
+import HeaderResponsive from './components/HeaderResponsive';
 import Footer from './components/Footer';
 import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ function App() {
 		<Provider store={store}>
 			<BrowserRouter>
 				<Box>
-					<Header />
+					<HeaderResponsive />
 					<main
 					>
 						<Suspense fallback={<div> Loading ... </div>}></Suspense>

@@ -34,3 +34,12 @@ export interface OptionType {
     label: string;
     value: number;
 };
+
+export interface userType {
+	id: number;
+	_id: number;
+	username: string;
+	email: string;
+	name: string;
+	isAdmin: boolean;
+}

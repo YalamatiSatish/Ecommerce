@@ -16,15 +16,17 @@
     "tab",
     { "SwitchCase": 1 }
     ],
-    "quotes": [2, "single", "double", {
+    /* "quotes": [2, "backtick", "single"], */
+     "quotes": [2, "single",/* "double",  */ {
         "allowTemplateLiterals": true
-      } ],/*   "semi": [
+      } ],/* "semi": [
         "error",
         "always" ], */
     "comma-spacing": [ "error",
     { "before": false, "after": true } ],
     "no-var": [ "warn"
     ],
+    //"singleQuote": true,
     "no-console": [ "warn" ],
     "no-unused-vars": [ "error" ],
     "camelcase": ["error", {"properties": "never"}], "init-declarations": ["error", "always"], "space-before-function-paren": ["error", "never"], "keyword-spacing": ["error", { "before": true, "after": true }], "arrow-spacing": ["error", { "before": true, "after": true }], "react/jsx-tag-spacing": ["error", {

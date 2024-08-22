@@ -1,5 +1,4 @@
-
-import  axios, { AxiosInstance, AxiosResponse, CancelTokenSource } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, CancelTokenSource } from 'axios';
 
 const getCookie = (name: string) => {
 	let cookieValue = null;
@@ -47,7 +46,7 @@ const baseInstance: AxiosInstance = axios.create({
 
 // Define type for headers
 type HeadersProps = {
-    [key: string]: string;
+	[key: string]: string;
 };
 interface APIParamsType {
 	method: 'get' | 'post' | 'put' | 'patch' | 'delete';
@@ -56,6 +55,7 @@ interface APIParamsType {
 	isAuthenticated?: boolean;
 	params?: object;
 	cancelToken: CancelTokenSource;
+	headersProps?: any;
 }
 
 /**
@@ -72,10 +72,10 @@ function getInstance({
 	params,
 	cancelToken,
 }: {
-    isAuthenticated?: boolean;
-    headersProps?: HeadersProps;
-    params?: object;
-    cancelToken: CancelTokenSource;
+	isAuthenticated?: boolean;
+	headersProps?: HeadersProps;
+	params?: object;
+	cancelToken: CancelTokenSource;
 }): AxiosInstance {
 	// Create a new Axios instance with cancel token if authenticated
 	const instance: AxiosInstance = isAuthenticated
@@ -106,15 +106,16 @@ function callAPI<T>({
 	isAuthenticated = false,
 	params,
 	cancelToken,
+	headersProps,
 }: APIParamsType): Promise<AxiosResponse<T>> {
-	const instance = getInstance({ isAuthenticated, params, cancelToken });
+	const instance = getInstance({ isAuthenticated, headersProps, params, cancelToken });
 	switch (method) {
 		case 'get':
 		case 'delete':
 			return instance[method]<T>(route, { cancelToken: cancelToken.token });
 		case 'post':
 		case 'put':
-			return instance[method]<T>(route, body,  { cancelToken: cancelToken.token });
+			return instance[method]<T>(route, body, { cancelToken: cancelToken.token });
 		case 'patch':
 			return instance[method]<T>(route, body, { cancelToken: cancelToken.token });
 		default:
@@ -133,34 +134,29 @@ export const getCancelToken = (): CancelTokenSource => axios.CancelToken.source(
  */
 export const HTTP = {
 	/**
-     * Make a GET request.
-     */
-	Get: <T>(params: Omit<APIParamsType, 'method'>) =>
-		callAPI<T>({ ...params, method: 'get' }),
+	 * Make a GET request.
+	 */
+	Get: <T>(params: Omit<APIParamsType, 'method'>) => callAPI<T>({ ...params, method: 'get' }),
 
 	/**
-     * Make a POST request.
-     */
-	Post: <T>(params: Omit<APIParamsType, 'method'>) =>
-		callAPI<T>({ ...params, method: 'post' }),
+	 * Make a POST request.
+	 */
+	Post: <T>(params: Omit<APIParamsType, 'method'>) => callAPI<T>({ ...params, method: 'post' }),
 
 	/**
-     * Make a PUT request.
-     */
-	Put: <T>(params: Omit<APIParamsType, 'method'>) =>
-		callAPI<T>({ ...params, method: 'put' }),
+	 * Make a PUT request.
+	 */
+	Put: <T>(params: Omit<APIParamsType, 'method'>) => callAPI<T>({ ...params, method: 'put' }),
 	/**
-     * Make a Patch request.
-     */
-	Patch: <T>(params: Omit<APIParamsType, 'method'>) =>
-		callAPI<T>({ ...params, method: 'patch' }),
+	 * Make a Patch request.
+	 */
+	Patch: <T>(params: Omit<APIParamsType, 'method'>) => callAPI<T>({ ...params, method: 'patch' }),
 	/**
-     * Make a DELETE request.
-     */
+	 * Make a DELETE request.
+	 */
 	Delete: <T>(params: Omit<APIParamsType, 'method'>) =>
 		callAPI<T>({ ...params, method: 'delete' }),
 };
-
 
 export const returnURL = () => {
 	if (process.env.NODE_ENV === 'production') {
