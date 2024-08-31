@@ -1,4 +1,3 @@
-
 export const productDetailMain = () => ({
 	padding: '20px 0px 0px 150px',
 	'@media (max-width:1024px)': {
@@ -55,6 +54,23 @@ export const productDetailImg = () => ({
 });
 
 //Cart
+export const cartGridOuter = () => ({
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'center',
+	borderBottom: '1px solid gray',
+	'@media (max-width:767px)': {
+		flexDirection: 'column',
+
+	},
+});
+export const cartImage = () => ({
+	width: '125px', height: '125px',
+	'@media (max-width:767px)': {
+		width: '100%', height: '125px',
+
+	},
+});
 // LogInScreen
 export const logInFormOuter = () => ({
 	display: 'flex',

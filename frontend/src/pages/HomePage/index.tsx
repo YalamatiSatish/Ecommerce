@@ -15,7 +15,6 @@ import ErrorMessage from '../../components/ErrorMessage';
 
 const HomePage: FC<RouteType> = () => {
 	const { products, loading, error } = useSelector((state: RootState) => state.products);
-	console.log(loading, 'loading', error);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(fetchProductsList(null));
@@ -33,7 +32,7 @@ const HomePage: FC<RouteType> = () => {
 
 	return (
 		<Box
-			sx={{ padding: '20px 0px 0px 150px', '@media (max-width:1024px)': { padding: '20px' }}}
+			sx={{ padding: '20px 0px 0px 150px', '@media (max-width:1024px)': { padding: '20px' }, backgroundColor:'' }}
 		>
 			<Typography variant='h3' sx={{ letterSpacing: '1.5px' }}>
 				{' '}
@@ -54,12 +53,13 @@ const HomePage: FC<RouteType> = () => {
 				>
 					<Grid
 						container
-						spacing={{ xs: 2, md: 3 }}
+						spacing={{ xs: 2, sm: 3, md: 4,  lg:5, xl:6    }}
 						columns={{
 							xs: 4,
 							sm: 8,
 							md: 12,
-						}} /* spacing={{ xs: 2, sm: 8,  md: 12, lg:16, xl:20  }} columns={{ xs: 4, sm: 8, md: 12, lg:16, xl:20  }} */
+						}}
+						 /* spacing={{ xs: 2, sm: 8,  md: 12, lg:16, xl:20  }} columns={{ xs: 4, sm: 8, md: 12, lg:16, xl:20  }} */
 					>
 						{products &&
 							products.map((product) => (
@@ -67,8 +67,8 @@ const HomePage: FC<RouteType> = () => {
 									item
 									xs={4}
 									sm={4}
-									md={4}
-									lg={16}
+									md={6}
+									lg={6}
 									xl={20}
 									key={product._id}
 									sx={{

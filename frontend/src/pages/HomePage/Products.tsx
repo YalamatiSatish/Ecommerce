@@ -18,7 +18,7 @@ const Products = ({ product, }: ProductsType) => {
 	return (
 		<Box key={product._id}>
 			{' '}
-			<Card sx={{ maxWidth: 345, padding: '20px', minHeight: '250px', }}>
+			<Card sx={{ /* */ /* maxWidth: 345, */ width:'90%', padding: '20px', minHeight: '250px', boxShadow: '0px 0px 4px 0px gray', }}>
 				<CardActionArea>
 					<Link to={`/product/${product._id}`}>
 						<CardMedia

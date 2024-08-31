@@ -17,10 +17,15 @@ import { Link } from 'react-router-dom';
 import { HeaderOuterStyle } from './style';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
+
+
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { handleLogOutUser } from '../store/user/slice';
 import { useAppDispatch } from '../store';
+
+
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
 	borderRadius: theme.shape.borderRadius,
@@ -61,6 +66,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	},
 }));
 
+
+
 const HeaderResponsive = () => {
 	const { userloginDetails } = useSelector((state: RootState) => state.userLogin);
 	const dispatch = useAppDispatch();
@@ -100,7 +107,6 @@ const HeaderResponsive = () => {
 
 	// Desktop Logout functionality
 	const [anchorElDesktop, setAnchorElDesktop] = React.useState<null | HTMLElement>(null);
-
 	const handleClickDesktop = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElDesktop(event.currentTarget);
 	};
@@ -203,7 +209,7 @@ const HeaderResponsive = () => {
 	);
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position='static' sx={HeaderOuterStyle}>
+			<AppBar position='sticky' sx={HeaderOuterStyle}>
 				<Toolbar>
 					<Typography
 						variant='h6'
@@ -211,7 +217,10 @@ const HeaderResponsive = () => {
 						component='div'
 						sx={{ display: { /* xs: 'none', */ sm: 'block' }, backgroundColor: '' }}
 					>
-						<Link to='/' style={{ textDecoration: 'none', color: 'white', cursor:'pointer' }}>
+						<Link
+							to='/'
+							style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}
+						>
 							{' '}
 							PROSHOP{' '}
 						</Link>{' '}
@@ -234,7 +243,7 @@ const HeaderResponsive = () => {
 									<Menu
 										anchorEl={anchorElDesktop}
 										open={Boolean(anchorElDesktop)}
-										onClick={handleCloseDesktop}
+										onClose={handleCloseDesktop}
 										sx={{ marginTop: 1 }}
 									>
 										<MenuItem onClick={handleProfileDesktop}>
