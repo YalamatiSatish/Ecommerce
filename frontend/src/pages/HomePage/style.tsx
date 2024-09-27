@@ -75,7 +75,7 @@ export const cartImage = () => ({
 export const logInFormOuter = () => ({
 	display: 'flex',
 	flexDirection: 'column',
-	width: '350px',
+	width: '100%',
 	paddingLeft: '140px',
 	marginTop: '20px',
 	'@media (max-width:1024px)': {

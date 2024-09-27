@@ -31,9 +31,7 @@ interface FormErrors {
 }
 
 const RegisterUser = () => {
-	const {  loading, error, userRegister } = useSelector(
-		(state: RootState) => state.userLogin,
-	);
+	const { loading, error, userRegister } = useSelector((state: RootState) => state.userLogin);
 	const dispatch = useAppDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -108,7 +106,14 @@ const RegisterUser = () => {
 		//dispatch(fetchUserLogInDetails(logInDetails));
 	};
 	return (
-		<Box>
+		<Box
+			sx={{
+				width: '100%',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
 			{loading === 'loading' ? (
 				<Loader />
 			) : loading === 'failed' ? (

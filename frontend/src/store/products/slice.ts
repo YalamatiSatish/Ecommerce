@@ -6,7 +6,7 @@ const initialState: ProductsSlice = {
 	loading: 'idle',
 	products: [],
 	product: {
-		_id: '',
+		_id: 0,
 		name: '',
 		image: '',
 		description: '',
@@ -16,6 +16,7 @@ const initialState: ProductsSlice = {
 		countInStock: 0,
 		rating: 0,
 		numReviews: 0,
+		createdAt: '',
 	},
 	error: {
 		error_detail: '',
@@ -34,7 +35,7 @@ export const productsSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(fetchProductsList.fulfilled, (state, { payload }) => {
-			console.log(payload, 'payload')
+			console.log(payload, 'payload');
 			if (payload) {
 				state.products = payload;
 			}
@@ -53,7 +54,7 @@ export const productsSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(fetchProductDetail.fulfilled, (state, { payload }) => {
-			console.log(state.loading, 'check', payload)
+			console.log(state.loading, 'check', payload);
 			if (payload) {
 				state.product = payload;
 			}

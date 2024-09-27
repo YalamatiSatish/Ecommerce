@@ -18,7 +18,7 @@ export interface RouteProps {
 
 
 export interface productType {
-    _id: string;
+    _id: number;
     name: string;
     image: string;
     description: string;
@@ -28,6 +28,8 @@ export interface productType {
     countInStock: number;
     rating: number;
     numReviews: number;
+    createdAt:string;
+    qty?: number;
 };
 
 export interface OptionType {
