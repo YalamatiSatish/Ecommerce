@@ -7,6 +7,7 @@ export interface UserSlice {
     userRegister:registerdUserType | null;
 	userProfile:registerdUserType | null;
 	error: ErrorDetail;
+	darkMode: boolean;
 }
 
 export interface loggedInUserType {

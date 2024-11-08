@@ -123,7 +123,7 @@ const ShippingPage = () => {
 					<Box
 						component='form'
 						onSubmit={handleSubmit}
-						/* noValidate */ sx={logInFormOuter}
+						sx={logInFormOuter}
 					>
 						<CheckOut step={1} />
 						<h3> SHIPPING </h3>

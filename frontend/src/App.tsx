@@ -7,21 +7,28 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import RouteProvider from './routes';
-
+import { ThemeProvider } from '@mui/material/styles';
+import { theme, darkTheme } from './bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
 
 function App() {
+	const { darkMode } = useSelector((state: RootState) => state.userLogin);
+
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
-				<Box>
-					<HeaderNew  />
-					<main>
-						<Suspense fallback={<div> Loading ... </div>}></Suspense>
-						<RouteProvider />
-					</main>
-					<Footer />
-				</Box>
-			</BrowserRouter>
+			<ThemeProvider theme={darkMode ? darkTheme : theme}>
+				<BrowserRouter>
+					<Box>
+						<HeaderNew />
+						<main>
+							<Suspense fallback={<div> Loading ... </div>}></Suspense>
+							<RouteProvider />
+						</main>
+						<Footer />
+					</Box>
+				</BrowserRouter>
+			</ThemeProvider>
 		</Provider>
 	);
 }

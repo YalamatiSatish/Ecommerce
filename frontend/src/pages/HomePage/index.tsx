@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, /* Container, Card  */ } from '@mui/material';
 import React, { FC, useEffect /* useState */ } from 'react';
 import { RouteType } from '../../types/common';
 import Products from './Products';
@@ -30,9 +30,55 @@ const HomePage: FC<RouteType> = () => {
 		fetchProducts();
 	}, []); */
 
+	/* 	const ResponsiveCardGrid: React.FC = () => {
+		return (
+			<Container maxWidth="lg" sx={{ padding: 2 }}>
+				<Grid container spacing={4}>
+					{products &&
+						products.map((product) => (
+							<Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+								<Card sx={{ height: '100%' }}>
+									<Products product={product} />{' '}
+								</Card>
+							</Grid>
+						))}
+				</Grid>
+			</Container>
+		);
+	}; */
+
+	/* <Container maxWidth="lg" sx={{ padding: 2 }}>
+			<Grid container spacing={4}>
+			  {cardData.map((card) => (
+				<Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+				  <Card sx={{ height: '100%' }}>
+					<CardMedia
+					  component="img"
+					  height="140"
+					  image={card.image}
+					  alt={card.title}
+					/>
+					<CardContent>
+					  <Typography gutterBottom variant="h5" component="div">
+						{card.title}
+					  </Typography>
+					  <Typography variant="body2" color="text.secondary">
+						{card.description}
+					  </Typography>
+					</CardContent>
+				  </Card>
+				</Grid>
+			  ))}
+			</Grid>
+		</Container> */
+
 	return (
 		<Box
-			sx={{ padding: '20px 0px 0px 150px', '@media (max-width:1024px)': { padding: '20px' }, backgroundColor:'' }}
+			sx={{
+				padding: '20px 0px 0px 150px',
+				'@media (max-width:1024px)': { padding: '20px' },
+				backgroundColor: '',
+			}}
 		>
 			<Typography variant='h3' sx={{ letterSpacing: '1.5px' }}>
 				{' '}
@@ -47,19 +93,17 @@ const HomePage: FC<RouteType> = () => {
 					sx={{
 						flexGrow: 1,
 						backgroundColor: 'white',
-						marginTop:
-							'40px' /* display:'flex', alignItems:'center', justifyContent:'center' */,
+						marginTop: '40px',
 					}}
 				>
 					<Grid
 						container
-						spacing={{ xs: 2, sm: 3, md: 4,  lg:5, xl:6    }}
+						spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
 						columns={{
 							xs: 4,
 							sm: 8,
 							md: 12,
 						}}
-						 /* spacing={{ xs: 2, sm: 8,  md: 12, lg:16, xl:20  }} columns={{ xs: 4, sm: 8, md: 12, lg:16, xl:20  }} */
 					>
 						{products &&
 							products.map((product) => (
@@ -78,7 +122,7 @@ const HomePage: FC<RouteType> = () => {
 										width: '200%',
 									}}
 								>
-									<Products product={product} /* key={product._id} */ />{' '}
+									<Products product={product} />{' '}
 								</Grid>
 							))}
 					</Grid>

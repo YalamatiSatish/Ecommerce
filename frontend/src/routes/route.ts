@@ -10,6 +10,8 @@ const registerPage = lazy(() => import('../pages/HomePage/RegisterUser'));
 const ProfilePage = lazy(() => import('../pages/HomePage/Profile'));
 const ShippingPage = lazy(() => import('../pages/HomePage/ShippingPage'));
 const PaymentPage = lazy(() => import('../pages/HomePage/PaymentPage'));
+const PlaceOrderPage = lazy(() => import('../pages/HomePage/PlaceOrderPage'));
+
 export const routes: RouteType[] = [
 	{
 		path: '/',
@@ -59,5 +61,11 @@ export const routes: RouteType[] = [
 		component: PaymentPage,
 		isPrivate: true,
 		info: { title: 'PaymentPage' },
+	},
+	{
+		path: '/placeorder',
+		component: PlaceOrderPage,
+		isPrivate: true,
+		info: { title: 'PlaceOrderPage' },
 	},
 ];

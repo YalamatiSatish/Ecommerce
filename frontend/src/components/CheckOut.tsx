@@ -14,7 +14,7 @@ interface CheckOutprop {
 
 const CheckOut = ({ step: step }: CheckOutprop) => {
 	//const steps = ['Login', 'Shipping', 'payment', 'place order'];
-	const steps = ['login', 'shipping', 'payment', 'place order'];
+	const steps = ['login', 'shipping', 'payment', 'placeorder'];
 
 	const [activeStep, setActiveStep] = React.useState<number>(0);
 	React.useEffect(() => {
@@ -66,7 +66,7 @@ const CheckOut = ({ step: step }: CheckOutprop) => {
 	};
 
 	return (
-		<Box sx={{ width: '100%' }}>
+		<Box sx={{ width: '98%' }}>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label /* index */) => {
 					const stepProps: { completed?: boolean } = {};

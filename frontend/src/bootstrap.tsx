@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme /*  ThemeProvider  */ } from '@mui/material/styles';
 import './index.scss';
+//import { useSelector } from 'react-redux';
+//import { RootState } from './store';
 
 declare module '@mui/material/styles' {
 	interface CommonColors {
@@ -23,12 +25,12 @@ declare module '@mui/material/styles' {
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const theme = createTheme({
+export const theme = createTheme({
 	palette: {
 		primary: {
 			main: '#0076a8',
 			light: '#EDF4f7',
-			dark:'#1e1e1e'
+			dark: '#1e1e1e',
 			// light: will be calculated from palette.primary.main,
 			// dark: will be calculated from palette.primary.main,
 			// contrastText: will be calculated to contrast with palette.primary.main
@@ -81,10 +83,40 @@ const theme = createTheme({
 	},
 });
 
+/* export const lightTheme = createTheme({
+	palette: {
+		mode: 'light',
+		background: {
+			default: '#ffffff',
+		},
+		primary: {
+			main: '#1976d2',
+		},
+		secondary: {
+			main: '#9c27b0',
+		},
+	},
+}); */
+
+export const darkTheme = createTheme({
+	palette: {
+		mode: 'dark',
+		background: {
+			default: '#121212',
+		},
+		primary: {
+			main: '#90caf9',
+		},
+		secondary: {
+			main: '#f48fb1',
+		},
+	},
+});
+//const { darkMode } = useSelector((state: RootState) => state.userLogin);
 const ThemeWrapper = () => (
-	<ThemeProvider theme={theme}>
-		<App />
-	</ThemeProvider>
+	<App />
+	/* <ThemeProvider theme={theme} theme={darkMode ? darkTheme : theme} >
+	</ThemeProvider>*/
 );
 
 root.render(

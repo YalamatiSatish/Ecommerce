@@ -16,6 +16,7 @@ const initialState: UserSlice = {
 		error_code: '',
 		status_code: '',
 	},
+	darkMode: false,
 };
 
 export const userLoginSlice = createSlice({
@@ -24,6 +25,9 @@ export const userLoginSlice = createSlice({
 	reducers: {
 		handleLogOutUser: (state ) => {
 			state.userloginDetails = null
+		},
+		handleModeChange: (state) => {
+			state.darkMode =!state.darkMode
 		},
 	},
 	extraReducers: (builder) => {
@@ -101,7 +105,7 @@ export const userLoginSlice = createSlice({
 	},
 });
 
-export const { handleLogOutUser } = userLoginSlice.actions;
+export const { handleLogOutUser, handleModeChange } = userLoginSlice.actions;
 
 // export the slice as a reducer
 export default userLoginSlice.reducer;

@@ -61,16 +61,108 @@ export const cartGridOuter = () => ({
 	borderBottom: '1px solid gray',
 	'@media (max-width:767px)': {
 		flexDirection: 'column',
-
 	},
 });
+
+export const cartPageMain = () => ({
+	marginLeft: '40px',
+	display: 'flex',
+	gap: '10px',
+	'@media (max-width:1024px)': {
+		marginLeft: '0px',
+
+		display: 'flex',
+		flexDirection: 'column',
+		gap: '0px',
+	},
+});
+
+/* export const cartPageItems = () => ({
+	width: '100%',
+	padding: '20px',
+	gap: '60px',
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'center',
+
+	'@media (max-width:1024px)': {
+		marginLeft: '0px',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		gap: '6px',
+		backgroundColor: 'red',
+	},
+}); */
+
+export const cartPageItems = () => ({
+	width: '100%',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
+	gap: 2,
+	py: 2,
+	flexWrap: 'wrap',
+	borderBottom: '1px solid #ddd',
+	'@media (max-width:1024px)': {
+		width: 'calc(100% - 12px)',
+		gap: 2,
+		padding: '6px',
+	},
+});
+
 export const cartImage = () => ({
-	width: '125px', height: '125px',
-	'@media (max-width:767px)': {
-		width: '100%', height: '125px',
-
+	width: '125px',
+	height: '125px',
+	'@media (max-width:1024px)': {
+		width: '100%',
+		height: '40%',
 	},
 });
+
+export const cartItemDesc = () => ({
+	width: '10%',
+	flexWrap: 'wrap',
+	'@media (max-width:1024px)': {
+		width: '100%',
+		fontWeight: 'bold',
+	},
+});
+
+export const cartItemPrice = () => ({
+	width: '10%',
+	'@media (max-width:1024px)': {
+		width: '100%',
+		fontWeight: 'bold',
+	},
+});
+
+export const cartItemSelect = () => ({
+	display: 'flex',
+	justifyContent: 'flex-start',
+	width: '160px',
+	'@media (max-width:1024px)': {
+		width: '100%',
+		/* display: 'flex',
+		alignItems: 'flex-start',
+		backgroundColor: 'red', */
+	},
+});
+
+export const cartPageCheckOut = () => ({
+	width: '40%',
+	border: '1px solid gray',
+	backgroundColor: 'white',
+	height: '20%',
+	margin: '20px',
+	'@media (max-width:1024px)': {
+		display: 'flex',
+		flexDirection: 'column',
+		margin: '0px',
+		width: '100%',
+	},
+});
+
 // LogInScreen
 export const logInFormOuter = () => ({
 	display: 'flex',
@@ -105,3 +197,96 @@ export const profileFormOuter = () => ({
 		paddingLeft: '10px',
 	}, */
 });
+
+// placeOrder Screen
+export const placeOrderMain = () => ({
+	paddingLeft: '10%',
+	paddingTop: '30px',
+	'@media (max-width:1024px)': {
+		padding: '0px',
+	},
+});
+
+export const placeOrderOuter = () => ({
+	flex: 3,
+	'@media (max-width:1024px)': {
+		width: '100%',
+	},
+});
+
+export const placeOrderCheckOut = () => ({
+	flex: 1,
+	border: '1px solid gray',
+	backgroundColor: 'white',
+	height: '20%',
+	margin: '20px',
+	'@media (max-width:1024px)': {
+		//width: '100%',
+		width: 'calc(100% -  10px)',
+
+		margin: '0px',
+		padding:'4px',
+
+	},
+});
+
+export const placeOrderElement = () => ({
+	borderBottom: '1px solid gray',
+	padding: '10px',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+});
+
+export const placeOrderSecond = () => ({
+	display: 'flex',
+	flexWrap: 'wrap',
+	'@media (max-width:1024px)': {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+});
+export const placeOrderTitleDesc = () => ({
+	display: 'flex',
+	flexWrap: 'wrap',
+	'@media (max-width:1024px)': {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+});
+
+export const placeOrderPrice = () => ({
+	display: 'flex',
+	flexWrap: 'wrap',
+	'@media (max-width:1024px)': {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+});
+
+export const placeOrderCartImage = () => ({
+	width: '50px',
+	height: '50px',
+	'@media (max-width:1024px)': {
+		width: '100%',
+		height: '40%',
+	},
+});
+
+export const placeOrderCartItemDesc = () => ({
+	width: '30%',
+	flexWrap: 'wrap',
+	fontWeight: 'bold',
+	'@media (max-width:1024px)': {
+		width: '100%',
+	},
+});
+
+export const placeOrderCartItemPrice = () => ({
+	width: '30%',
+	fontWeight: 'bold',
+	'@media (max-width:1024px)': {
+		width: '100%',
+	},
+});
+

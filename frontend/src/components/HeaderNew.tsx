@@ -24,7 +24,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { handleLogOutUser } from '../store/user/slice';
+import { handleLogOutUser, handleModeChange } from '../store/user/slice';
 import { useAppDispatch } from '../store';
 import { Link } from 'react-router-dom';
 //import { handleChangeMode } from '../store/products/slice';
@@ -94,7 +94,7 @@ const ToggleSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const HeaderNew = () => {
-	const { userloginDetails } = useSelector((state: RootState) => state.userLogin);
+	const { userloginDetails, } = useSelector((state: RootState) => state.userLogin);
 	const dispatch = useAppDispatch();
 
 	const [openMenuProfile, setOpenMenuProfile] = useState<boolean>(false);
@@ -106,6 +106,7 @@ const HeaderNew = () => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setChecked(event.target.checked);
+		dispatch(handleModeChange())
 	};
 
 	const theme = useTheme();
@@ -181,7 +182,7 @@ const HeaderNew = () => {
 					></ToggleSwitch>
 					{
 						/* theme.palette.mode === 'dark' */ !checked ? (
-							<CustomToolTip titleAsHTML={<h1>Light Mode</h1>}>
+							<CustomToolTip title={'Light Mode'} /* 	 */>
 								<Brightness7Icon />
 							</CustomToolTip>
 						) : (

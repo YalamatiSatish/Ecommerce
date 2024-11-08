@@ -16,13 +16,20 @@ import {
 	TextField,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SingleSelect from '../../components/SingleSelect';
 import { OptionType } from '../../types';
 import { Link } from 'react-router-dom';
-import { cartItemType } from '../../types/cart';
 import CustomToolTip from '../../components/ToolTip';
 import { singleSelectInput } from '../../components/style';
-//import { cartGridOuter } from './style';
+import {
+	cartPageMain,
+	cartPageCheckOut,
+	cartPageItems,
+	cartImage,
+	cartItemDesc,
+	cartItemPrice,
+	cartItemSelect,
+} from './style';
+import { cartItemType } from '../../types/cart';
 /* import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -30,15 +37,17 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom'; */
 /* type Props = {}; */
+export interface CartItemProps {
+	cartItem: cartItemType;
+	key: number;
+}
 
 const CartPage = (/* props: Props */) => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const productId = Number(location.pathname.match(/\d+/g));
 	const productOrderQty = Number(location.search.split('=')[1]);
-	console.log(productOrderQty, 'productOrderQty');
 	const { /* loading, error, */ product } = useSelector((state: RootState) => state.products);
-	console.log(product, 'product');
 	const { cartItems } = useSelector((state: RootState) => state.cart);
 
 	const dispatch = useAppDispatch();
@@ -47,11 +56,8 @@ const CartPage = (/* props: Props */) => {
 			dispatch(fetchProductDetail(productId));
 		}
 	}, [productId]);
-	console.log(dispatch, 'dispatch');
 	useEffect(() => {
-		console.log(product._id, 'idddddd');
 		if (product._id !== 0 && productOrderQty > 0) {
-			console.log('111111');
 			const newCartItem = {
 				_id: product._id,
 				name: product.name,
@@ -69,7 +75,6 @@ const CartPage = (/* props: Props */) => {
 			};
 			/* (product.qty = productOrderQty); */
 
-			console.log(newCartItem, 'newCartItem');
 			dispatch(handleAddItemsToCart(newCartItem));
 		}
 	}, [dispatch]);
@@ -83,9 +88,7 @@ const CartPage = (/* props: Props */) => {
 	const [qty, setQty] = useState<OptionType | null>(
 		{ label: '1', value: 1 } /* optionsSelectQty[0] */,
 	);
-	console.log(qty, 'qty');
 	const removeItemsFromCart = (id: number) => {
-		console.log(id, 'id');
 		dispatch(handleRemoveCartItems(id));
 	};
 
@@ -115,9 +118,7 @@ const CartPage = (/* props: Props */) => {
 	}, [qty]) */
 
 	const handleModifyQuantityCartItem = (cartItemId: number, itemQty: number | undefined) => {
-		console.log(itemQty, 'itemQty', cartItemId);
 		const filteredCartItem = cartItems.filter((item) => item._id === cartItemId)[0];
-		console.log(filteredCartItem, 'filterCartItem');
 		const modifiedCartItem = {
 			_id: filteredCartItem._id,
 			name: filteredCartItem.name,
@@ -134,131 +135,121 @@ const CartPage = (/* props: Props */) => {
 			qty: itemQty /* qty?.value */,
 		};
 
-		console.log(modifiedCartItem, 'modifiedCartItem');
 		dispatch(handleAddItemsToCart(modifiedCartItem));
 	};
 
 	const handleCheckOut = () => {
-		navigate(localStorage.getItem('userInfo') ? '/shipping' : '/login')
+		navigate(localStorage.getItem('userInfo') ? '/shipping' : '/login');
+	};
+
+
+	const CartPageitem: React.FC<CartItemProps> = ({ cartItem, key }) => {
+		return (
+			<Box
+				//direction='row'
+				//spacing={2}
+				key={key}
+				style={{
+					borderBottom: key !== cartItems?.length - 1 ? '1px solid lightgray' : 'none',
+				}}
+				//sx={cartPageItems}
+				sx={cartPageItems}
+			>
+				<Link to={`/product/${cartItem?._id}`}>
+					<Box component='img' sx={cartImage} src={cartItem?.image} />
+				</Link>
+				<Typography sx={cartItemDesc}>{cartItem?.name}</Typography>
+				<Typography sx={cartItemPrice}>$ {cartItem?.price}</Typography>
+				<Box sx={cartItemSelect}>
+					<Autocomplete
+						disablePortal
+						value={{
+							value: cartItem?.qty,
+							label: `${cartItem?.qty}`,
+						}}
+						onChange={(event: any, newValue: OptionType | null) => {
+							setQty(newValue);
+							handleModifyQuantityCartItem(cartItem?._id, newValue?.value);
+						}}
+						id='combo-box-demo'
+						options={optionsSelectQty(cartItem?.countInStock)}
+						sx={{ width: '100%' }}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								placeholder='Select an Option'
+								sx={singleSelectInput}
+							/>
+						)}
+						getOptionLabel={(option) => option.label}
+					/>
+				</Box>
+
+				<Button
+					sx={{
+						padding: 'none',
+						display: 'flex',
+						//width: '100%',
+						justifyContent: 'flex-start',
+					}}
+				>
+					<CustomToolTip title='delete'>
+						<DeleteIcon
+							onClick={() => {
+								removeItemsFromCart(Number(cartItem?._id));
+							}}
+							sx={{ color: 'black' }}
+						/>
+					</CustomToolTip>
+				</Button>
+			</Box>
+		);
 	};
 
 	return (
-		<Box sx={{ marginLeft: '40px', display: 'flex', gap: '10px' }}>
-			<Box sx={{ display: 'flex', flexDirection: 'column', width: '60%' }}>
+		<Box sx={cartPageMain} >
+
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					//padding: '10px',
+					width: '100%',
+				}}
+			>
 				<h1>Shopping Cart </h1>
-				<Box>
-					{cartItems?.length === 0 && (
-						<Box
-							sx={{
-								backgroundColor: 'lightblue',
-								color: 'white',
-								fontWeight: 'bold',
-								padding: '14px',
-							}}
-						>
-							<h4>Your Cart is empty</h4>
-						</Box>
-					)}
-					{cartItems?.length > 0 && (
-						<Box
-							sx={{ width: '100%' }}
-							/* sx={{
+				{cartItems?.length === 0 && (
+					<Box
+						sx={{
+							backgroundColor: 'lightblue',
+							color: 'white',
+							fontWeight: 'bold',
+							padding: '14px',
+						}}
+					>
+						<h4>Your Cart is empty</h4>
+					</Box>
+				)}
+				{cartItems?.length > 0 && (
+					<Box
+						sx={{ width: '100%' }}
+						/* sx={{
 						backgroundColor: 'white',
 						display: 'flex',
 						flexDirection: 'column',
 						gap: '40px',
 						padding: '40px',
 					}} */
-						>
-							{cartItems?.map((cartItem, cartItemIndex) => (
-								<Stack
-									direction='row'
-									spacing={2}
-									key={cartItemIndex}
-									sx={{
-										width: '97%',
-										padding: '20px',
-										gap: '60px',
-										borderBottom:
-											cartItemIndex !== cartItems?.length - 1
-												? '1px solid lightgray'
-												: 'none',
-										alignItems: 'center',
-									}}
-								>
-									<Link to={`/product/${cartItem?._id}`}>
-										<img
-											src={cartItem?.image}
-											style={{ width: '120px', height: '100px' }}
-										/>
-									</Link>
-									<Typography sx={{ width: '15%' }}>{cartItem?.name}</Typography>
-									<Typography sx={{ width: '10%' }}>
-										$ {cartItem?.price}
-									</Typography>
-									<Box sx={{ width: '160px' }}>
-										{/* <SingleSelect
-											options={optionsSelectQty(cartItem.countInStock)}
-											value={{
-												value: cartItem.qty,
-												label: `${cartItem.qty}`
-											}}
-											setValue={setQty}
-										/> */}
-										<Autocomplete
-											disablePortal
-											value={{
-												value: cartItem?.qty,
-												label: `${cartItem?.qty}`,
-											}}
-											//onChange={() => /* console.log('iddd', cartItem._id, cartItem.qty) */  dispatch(handleAddItemsToCart(cartItem._id, cartItem.qty))}
-											onChange={(event: any, newValue: OptionType | null) => {
-												setQty(newValue);
-												handleModifyQuantityCartItem(
-													cartItem?._id,
-													newValue?.value,
-												);
-											}}
-											id='combo-box-demo'
-											options={optionsSelectQty(cartItem?.countInStock)}
-											sx={{ width: '100%' }}
-											renderInput={(params) => (
-												<TextField
-													{...params}
-													placeholder='Select an Option'
-													sx={singleSelectInput}
-												/>
-											)}
-											getOptionLabel={(option) => option.label}
-										/>
-									</Box>
-
-									<Button sx={{ padding: 'none' }}>
-										<CustomToolTip title='delete'>
-											<DeleteIcon
-												onClick={() => {
-													removeItemsFromCart(Number(cartItem?._id));
-												}}
-												sx={{ color: 'black' }}
-											/>
-										</CustomToolTip>
-									</Button>
-								</Stack>
-							))}
-						</Box>
-					)}
-				</Box>
+					>
+						{cartItems?.map((cartItem, cartItemIndex) => (
+							<CartPageitem cartItem={cartItem} key={cartItemIndex} />
+						))}
+					</Box>
+				)}
 			</Box>
-			{/* {cartItems?.length > 0 && ( */}
-			<Box
-				sx={{
-					width: '30%',
-					border: '1px solid gray',
-					backgroundColor: 'white',
-					height: '20%',
-					margin: '20px',
-				}}
-			>
+
+			<Box sx={cartPageCheckOut} >
 				<Typography
 					variant='h5'
 					sx={{
@@ -323,98 +314,8 @@ const CartPage = (/* props: Props */) => {
 					</Button>
 				</Typography>
 			</Box>
-			{/* )} */}
 		</Box>
 	);
 };
 
 export default CartPage;
-/* <Grid
-							container
-							spacing={{ xs: 2, md: 6 }}
-							columns={{ xs: 4, sm: 8, md: 12 }}
-							key={cartItemIndex}
-							sx={cartGridOuter}
-						>
-							<Grid item md={1.5}>
-								<img
-									srcSet={`${cartItem.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-									src={`${cartItem.image}?w=164&h=164&fit=crop&auto=format`}
-									alt={cartItem.name}
-									loading='lazy'
-									style={{ width: '125px', height: '125px' }}
-								/>
-							</Grid>
-
-							<Grid item md={1.5} sx={{ width: '140px' }}>
-								{cartItem.name}
-							</Grid>
-							<Grid item md={1}>
-								${cartItem.price}
-							</Grid>
-							<Grid item>
-								<DeleteIcon />
-							</Grid>
-						</Grid> */
-
-/* <Card
-							key={cartItemIndex}
-							sx={{ maxWidth: 345, minHeight: '250px', backgroundColor:'white',  }}
-						>
-							<CardActionArea>
-								<Link to={`/product/${cartItem._id}`}>
-									<CardMedia
-										component='img'
-										//height='140'
-										image={cartItem.image}
-										alt={cartItem.name}
-										sx={{ minHeight: 100 }}
-									/>
-								</Link>
-								<CardContent sx={{ minHeight: '150px' }}>
-									<Typography
-										gutterBottom
-										variant='h5'
-										component='div'
-										sx={{ minHeight: '60px' }}
-									>
-										{cartItem.name}
-									</Typography>
-									<Typography variant='body2' color='text.secondary'>
-										<Stack
-											spacing={1}
-											sx={{
-												display: 'flex',
-												alignItems: 'center',
-												flexDirection: 'row',
-												gap: '10px',
-											}}
-										>
-											<Rating
-												name='half-rating'
-												value={cartItem.rating}
-												precision={0.5}
-												readOnly
-												sx={{ width: '140px' }}
-											/>
-											<Typography
-												sx={{
-													display: 'flex',
-													alignItems: 'center',
-													paddingBottom: '6px',
-												}}
-											>
-												{' '}
-												{cartItem.numReviews} reviews{' '}
-											</Typography>
-										</Stack>
-									</Typography>
-									<Typography
-										variant='h5'
-										sx={{ marginTop: '20px', fontFamily: 'Roboto Mono' }}
-									>
-										$ {cartItem.price}
-									</Typography>
-								</CardContent>
-							</CardActionArea>
-						</Card>*/

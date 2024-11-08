@@ -14,7 +14,8 @@ export interface shippingAddressType {
 
 export interface CartSlice {
 	loading: 'idle' | 'loading' | 'succeeded' | 'failed';
-	cartItems: cartItemType[] /* productType[] */;
+	cartItems: cartItemType[] ;
 	shippingAddress: shippingAddressType ;
+	paymentMethod: string;
 	error: ErrorDetail;
 }

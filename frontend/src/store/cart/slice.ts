@@ -15,6 +15,7 @@ const initialState: CartSlice = {
 	loading: 'idle',
 	cartItems: cartItemsFromlocalStorage,
 	shippingAddress: shippingAddressFromlocalStorage,
+	paymentMethod: '',
 	error: {
 		error_detail: '',
 		error_code: '',
@@ -125,13 +126,33 @@ export const cartSlice = createSlice({
 				};
 			}
 		},
+		handleSavePaymentMethod: (state, action) => {
+			if (action.payload !== null) {
+				localStorage.setItem(
+					'paymentMethod',
+					JSON.stringify(
+						action.payload,
+					),
+				);
+				return {
+					...state,
+					paymentMethod: action.payload,
+				};
+			}
+			//...state,
+		},
 	},
 	/* extraReducers: () => {
 
 	}, */
 });
 
-export const { handleAddItemsToCart, handleRemoveCartItems, handleShippingAddressItems } = cartSlice.actions;
+export const {
+	handleAddItemsToCart,
+	handleRemoveCartItems,
+	handleShippingAddressItems,
+	handleSavePaymentMethod,
+} = cartSlice.actions;
 
 // export the slice as a reducer
 export default cartSlice.reducer;
