@@ -30,32 +30,24 @@ import { Link } from 'react-router-dom';
 //import { handleChangeMode } from '../store/products/slice';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import CustomToolTip from './ToolTip';
+import { HeaderOuterStyle, searchHeader } from './style';
 
-const StyledToolbar = styled(Toolbar)({
+/* const StyledToolbar = styled(Toolbar)({
 	display: 'flex',
 	justifyContent: 'space-between',
-	backgroundColor: '#242323',
-});
+	backgroundColor: 'red',
+	//backgroundColor: '#242323',
+}); */
 
-const Search = styled('div')(({ theme }) => ({
-	backgroundColor: 'white' /* alpha(theme.palette.common.white, 0.15) */,
+/* const Search = styled('div')(({ theme }) => ({
+	backgroundColor: 'white',
 	padding: '0px 10px',
 	borderRadius: theme.shape.borderRadius,
 	width: '40%',
-	/* position: 'relative',
-	borderRadius: theme.shape.borderRadius,
-	'&:hover': {
-		backgroundColor: alpha(theme.palette.common.white, 0.25),
-	},
-	marginRight: theme.spacing(2),
-	marginLeft: 0,
-	width: '100%',
-	[theme.breakpoints.up('sm')]: {
-		marginLeft: theme.spacing(3),
-		width: 'auto',
-	}, */
-}));
+
+})); */
 
 const Icons = styled(Box)(({ theme }) => ({
 	display: 'none',
@@ -94,7 +86,7 @@ const ToggleSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const HeaderNew = () => {
-	const { userloginDetails, } = useSelector((state: RootState) => state.userLogin);
+	const { userloginDetails } = useSelector((state: RootState) => state.userLogin);
 	const dispatch = useAppDispatch();
 
 	const [openMenuProfile, setOpenMenuProfile] = useState<boolean>(false);
@@ -106,29 +98,30 @@ const HeaderNew = () => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setChecked(event.target.checked);
-		dispatch(handleModeChange())
+		dispatch(handleModeChange());
 	};
 
-	const theme = useTheme();
 
 	return (
 		<AppBar position='sticky'>
-			<StyledToolbar>
+			<Box sx={HeaderOuterStyle}>
 				<Typography
 					variant='h5'
-					sx={{ display: { xs: 'none', sm: 'block' }, backgroundColor: '' }}
+					sx={{ display: { xs: 'none', sm: 'block' } /* backgroundColor: ''  */ }}
 				>
 					{' '}
-					<Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
+					<Link to='/' style={{ textDecoration: 'none' /* color: 'white'  */ }}>
 						PROSHOP
 					</Link>
 				</Typography>
-				<Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-					<StoreIcon sx={{ display: { xs: 'block', sm: 'none' }, backgroundColor: '' }} />
+				<Link to='/' style={{ textDecoration: 'none' /*  color: 'white' */ }}>
+					<StoreIcon
+						sx={{ display: { xs: 'block', sm: 'none' } /* backgroundColor: ''  */ }}
+					/>
 				</Link>
-				<Search>
+				<Box sx={searchHeader} >
 					<InputBase placeholder='Search ...' />{' '}
-				</Search>
+				</Box>
 				<Icons>
 					{/* <Badge badgeContent={4} color='error'>
 						<MailIcon />
@@ -137,7 +130,7 @@ const HeaderNew = () => {
 						<NotificationsIcon />
 					</Badge> */}
 					<Badge badgeContent={0} color='error'>
-						<Link to='/cart' style={{ textDecoration: 'none', color: 'white' }}>
+						<Link to='/cart' style={{ textDecoration: 'none' /* color: 'white' */ }}>
 							<ShoppingCartIcon />
 						</Link>
 					</Badge>
@@ -149,7 +142,7 @@ const HeaderNew = () => {
 							onClick={() => setOpenMenuProfile(true)}
 						/>
 					) : (
-						<Link to='/login' style={{ textDecoration: 'none', color: 'white' }}>
+						<Link to='/login' style={{ textDecoration: 'none' /* color: 'white' */ }}>
 							<PersonIcon />
 						</Link>
 					)}
@@ -176,14 +169,14 @@ const HeaderNew = () => {
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<ToggleSwitch
 						color='default'
-						sx={{ color: 'white' }}
+						//sx={{ color: 'white' }}
 						checked={checked}
 						onChange={handleChange}
 					></ToggleSwitch>
 					{
 						/* theme.palette.mode === 'dark' */ !checked ? (
 							<CustomToolTip title={'Light Mode'} /* 	 */>
-								<Brightness7Icon />
+								<LightModeOutlinedIcon />
 							</CustomToolTip>
 						) : (
 							<CustomToolTip title={'Dark mode'}>
@@ -198,7 +191,7 @@ const HeaderNew = () => {
 						checked={checked}
 						onChange={handleChange}
 					/> */}
-			</StyledToolbar>
+			</Box>
 
 			{userloginDetails !== null ? (
 				<Menu

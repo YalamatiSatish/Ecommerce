@@ -92,7 +92,7 @@ const HomePage: FC<RouteType> = () => {
 				<Box
 					sx={{
 						flexGrow: 1,
-						backgroundColor: 'white',
+						backgroundColor: 'red',
 						marginTop: '40px',
 					}}
 				>

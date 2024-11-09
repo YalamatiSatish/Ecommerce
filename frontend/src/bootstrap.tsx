@@ -5,6 +5,8 @@ import { createTheme /*  ThemeProvider  */ } from '@mui/material/styles';
 import './index.scss';
 //import { useSelector } from 'react-redux';
 //import { RootState } from './store';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 declare module '@mui/material/styles' {
 	interface CommonColors {
@@ -26,7 +28,7 @@ declare module '@mui/material/styles' {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 export const theme = createTheme({
-	palette: {
+	/* palette: {
 		primary: {
 			main: '#0076a8',
 			light: '#EDF4f7',
@@ -57,6 +59,34 @@ export const theme = createTheme({
 			customColor11: '#FFF0059',
 			customColor12: '#F8FCFF',
 		},
+	}, */
+	palette: {
+		mode: 'light',
+		primary: {
+			main: '#000000', // Black as the primary accent
+			light: '#4d4d4d', // Lighter black/gray for hover states
+			dark: '#1a1a1a', // Dark black for active states
+			contrastText: '#ffffff', // White text on primary backgrounds
+		},
+		secondary: {
+			main: '#333333', // Dark gray as a secondary color
+			light: '#666666', // Medium gray for secondary hover states
+			dark: '#1a1a1a', // Darker gray for secondary active states
+			contrastText: '#ffffff', // White text on secondary backgrounds
+		},
+		background: {
+			default: '#f5f5f5', // Light gray for the main background
+			paper: '#ffffff', // Pure white for paper elements
+		},
+		text: {
+			primary: '#1e1e1e', // Almost black for primary text
+			secondary: '#575757', // Dark gray for secondary text
+			disabled: '#9e9e9e', // Light gray for disabled text
+		},
+		divider: '#e0e0e0', // Light gray divider lines
+	},
+	shape: {
+		borderRadius: 6, // Default border-radius for all components
 	},
 	typography: {
 		fontFamily: ['Titillium Web', 'Roboto Mono'].join(','),
@@ -99,7 +129,7 @@ export const theme = createTheme({
 }); */
 
 export const darkTheme = createTheme({
-	palette: {
+	/* palette: {
 		mode: 'dark',
 		background: {
 			default: '#121212',
@@ -110,11 +140,64 @@ export const darkTheme = createTheme({
 		secondary: {
 			main: '#f48fb1',
 		},
+	}, */
+	palette: {
+		mode: 'dark',
+		primary: {
+			main: '#ffffff', // White as the primary color for contrast
+			light: '#bdbdbd', // Light gray for hover states
+			dark: '#757575', // Medium gray for active states
+			contrastText: '#000000', // Black text on primary elements
+		},
+		secondary: {
+			main: '#b0b0b0', // Light gray as a secondary color
+			light: '#d6d6d6', // Lighter gray for secondary hover states
+			dark: '#8c8c8c', // Darker gray for secondary active states
+			contrastText: '#000000', // Black text on secondary elements
+		},
+		background: {
+			default: '#121212', // Deep black for the main background
+			paper: '#1e1e1e', // Dark gray for paper elements
+		},
+		text: {
+			primary: '#ffffff', // White for primary text on dark backgrounds
+			secondary: '#b0b0b0', // Light gray for secondary text
+			disabled: '#757575', // Medium gray for disabled text
+		},
+		divider: '#333333', // Dark gray for divider lines
+	},
+	shape: {
+		borderRadius: 6, // Default border-radius for all components
+	},
+	typography: {
+		fontFamily: ['Titillium Web', 'Roboto Mono'].join(','),
+	},
+	components: {
+		MuiContainer: {
+			styleOverrides: {
+				root: {
+					maxWidth: '100%',
+					paddingLeft: '40px !important',
+					paddingRight: '40px !important',
+				},
+			},
+		},
+		/* MuiInputBase: {
+			styleOverrides: {
+				input: {
+					WebkitTextSecurity: 'disc', // This will make sure it uses dots
+					MozTextSecurity: 'disc', // Firefox specific (but might not be necessary)
+					textSecurity: 'disc', // Standard (not widely supported yet)
+				},
+			},
+		}, */
 	},
 });
 //const { darkMode } = useSelector((state: RootState) => state.userLogin);
 const ThemeWrapper = () => (
-	<App />
+	<Provider store={store}>
+		<App />
+	</Provider>
 	/* <ThemeProvider theme={theme} theme={darkMode ? darkTheme : theme} >
 	</ThemeProvider>*/
 );

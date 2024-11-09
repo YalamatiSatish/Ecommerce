@@ -4,13 +4,14 @@ import productsSlice from './products/slice';
 import  cartSlice from './cart/slice';
 import  userLoginSlice  from './user/slice';
 import  orderSlice  from './order/slice';
-
+import themeSlice  from './theme/slice';
 export const store = configureStore({
 	reducer: {
 		products: productsSlice,
 		cart: cartSlice,
 		userLogin: userLoginSlice,
-		order: orderSlice
+		order: orderSlice,
+		theme : themeSlice
 	},
 });
 
