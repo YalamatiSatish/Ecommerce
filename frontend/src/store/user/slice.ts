@@ -3,31 +3,27 @@ import { UserSlice } from '../../types/user';
 import { fetchUserLogInDetails, registerUser, updateUser, getUserProfile } from './thunk';
 
 const userInfoFromlocalStorage = localStorage.getItem('userInfo')
-	? JSON.parse(localStorage.getItem('userInfo')! )
+	? JSON.parse(localStorage.getItem('userInfo')!)
 	: null;
 
 const initialState: UserSlice = {
 	loading: 'idle',
 	userloginDetails: userInfoFromlocalStorage,
-	userRegister:userInfoFromlocalStorage,
+	userRegister: userInfoFromlocalStorage,
 	userProfile: null,
 	error: {
 		error_detail: '',
 		error_code: '',
 		status_code: '',
 	},
-	darkMode: false,
 };
 
 export const userLoginSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		handleLogOutUser: (state ) => {
-			state.userloginDetails = null
-		},
-		handleModeChange: (state) => {
-			state.darkMode =!state.darkMode
+		handleLogOutUser: (state) => {
+			state.userloginDetails = null;
 		},
 	},
 	extraReducers: (builder) => {
@@ -52,7 +48,7 @@ export const userLoginSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(registerUser.fulfilled, (state, { payload }) => {
-			if (payload ) {
+			if (payload) {
 				state.userRegister = payload;
 				state.userloginDetails = payload;
 			}
@@ -70,10 +66,9 @@ export const userLoginSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-			if (payload ) {
+			if (payload) {
 				state.userProfile = payload;
 				state.userloginDetails = payload;
-
 			}
 			state.loading = 'succeeded';
 		});
@@ -89,9 +84,8 @@ export const userLoginSlice = createSlice({
 			state.loading = 'loading';
 		});
 		builder.addCase(getUserProfile.fulfilled, (state, { payload }) => {
-			if (payload ) {
+			if (payload) {
 				state.userProfile = payload;
-
 			}
 			state.loading = 'succeeded';
 		});
@@ -105,7 +99,7 @@ export const userLoginSlice = createSlice({
 	},
 });
 
-export const { handleLogOutUser, handleModeChange } = userLoginSlice.actions;
+export const { handleLogOutUser } = userLoginSlice.actions;
 
 // export the slice as a reducer
 export default userLoginSlice.reducer;

@@ -17,6 +17,7 @@ import Loader from '../../components/Loader';
 import ErrorMessage from '../../components/ErrorMessage';
 import SingleSelect from '../../components/SingleSelect';
 import { OptionType } from '../../types';
+import { buttonStyle } from './style';
 //import { handleAddItemsToCart } from '../../store/cart/slice';
 
 const ProductDetail = () => {
@@ -196,13 +197,7 @@ const ProductDetail = () => {
 							>
 								<Button
 									variant='contained'
-									sx={{
-										backgroundColor: '#00121A',
-										color: 'white',
-										padding: '10px 30px',
-										fontWeight: 700,
-										maxWidth: '80%',
-									}}
+									sx={buttonStyle}
 									disabled={product?.countInStock === 0}
 									onClick={handleAddToCart}
 								>

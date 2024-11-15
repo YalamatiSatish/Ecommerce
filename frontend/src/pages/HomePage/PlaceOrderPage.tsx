@@ -31,6 +31,7 @@ import { useAppDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
 import { createNewOrder } from '../../store/order/thunk';
+import { buttonStyle } from './style';
 
 const PlaceOrderPage = () => {
 	const { cartItems, shippingAddress, paymentMethod } = useSelector(
@@ -190,16 +191,7 @@ const PlaceOrderPage = () => {
 					>
 						<Button
 							variant='contained'
-							style={{
-								backgroundColor: '#00121A',
-								color: 'white',
-								padding: '10px 40px',
-								fontWeight: 700,
-								maxWidth: '80%',
-								display: 'flex',
-								alignItems: 'center',
-								textTransform: 'uppercase',
-							}}
+							sx={buttonStyle}
 							disabled={cartItems?.length === 0}
 							onClick={() => handleCreateOrder()}
 						>

@@ -1,4 +1,4 @@
-import { Box, Typography, /* Container, Card  */ } from '@mui/material';
+import { Box, Typography /* Container, Card  */ } from '@mui/material';
 import React, { FC, useEffect /* useState */ } from 'react';
 import { RouteType } from '../../types/common';
 import Products from './Products';
@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import Loader from '../../components/Loader';
 import ErrorMessage from '../../components/ErrorMessage';
+import { homePageOuter, homePageInner, homePageProductGrid } from './style';
 
 const HomePage: FC<RouteType> = () => {
 	const { products, loading, error } = useSelector((state: RootState) => state.products);
@@ -73,13 +74,7 @@ const HomePage: FC<RouteType> = () => {
 		</Container> */
 
 	return (
-		<Box
-			sx={{
-				padding: '20px 0px 0px 150px',
-				'@media (max-width:1024px)': { padding: '20px' },
-				backgroundColor: '',
-			}}
-		>
+		<Box sx={homePageOuter}>
 			<Typography variant='h3' sx={{ letterSpacing: '1.5px' }}>
 				{' '}
 				LATEST PRODUCTS
@@ -89,13 +84,7 @@ const HomePage: FC<RouteType> = () => {
 			) : loading === 'failed' ? (
 				<ErrorMessage> {error?.error_detail} </ErrorMessage>
 			) : (
-				<Box
-					sx={{
-						flexGrow: 1,
-						backgroundColor: 'red',
-						marginTop: '40px',
-					}}
-				>
+				<Box sx={homePageInner}>
 					<Grid
 						container
 						spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
@@ -115,12 +104,7 @@ const HomePage: FC<RouteType> = () => {
 									lg={6}
 									xl={20}
 									key={product._id}
-									sx={{
-										flexGrow: 1,
-										backgroundColor: 'white',
-										marginTop: '40px',
-										width: '200%',
-									}}
+									sx={homePageProductGrid}
 								>
 									<Products product={product} />{' '}
 								</Grid>

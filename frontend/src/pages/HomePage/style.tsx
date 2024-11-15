@@ -1,3 +1,63 @@
+import { Theme } from '@mui/material/styles';
+
+// APP basic style
+export const mainStyle = (theme: Theme) => ({
+	//background: '#ffffff',
+	backgroundColor: theme.palette.background.default,
+	color: theme.palette.text.primary,
+});
+
+// Home page
+export const homePageOuter = (theme: Theme) => ({
+	padding: '20px 0px 0px 150px',
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
+	'@media (max-width:1024px)': { padding: '20px' },
+});
+
+export const homePageInner = (theme: Theme) => ({
+	flexGrow: 1,
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
+	marginTop: '40px',
+	flexWrap: 'wrap',
+});
+
+export const homePageProductGrid = (theme: Theme) => ({
+	flexGrow: 1,
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
+	marginTop: '40px',
+	width: '200%',
+});
+
+// button style
+export const buttonStyle = (theme: Theme) => ({
+	//backgroundColor: '#00121A',
+	//color: 'white',
+	backgroundColor: theme.palette.text.primary,
+	color: theme.palette.background.paper,
+	padding: '10px 40px',
+	fontWeight: 700,
+	maxWidth: '80%',
+	display: 'flex',
+	alignItems: 'center',
+	textTransform: 'uppercase',
+});
+
+// product card
+export const productCard = (theme: Theme) => ({
+	width: '90%',
+	padding: '20px',
+	minHeight: '250px',
+	boxShadow: '0px 0px 4px 0px gray',
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
+	'@media (max-width:1024px)': {
+		width: '100%',
+	},
+});
+
 export const productDetailMain = () => ({
 	padding: '20px 0px 0px 150px',
 	'@media (max-width:1024px)': {
@@ -29,12 +89,13 @@ export const productDetailCart = () => ({
 	},
 });
 
-export const productDetailTitleDescription = () => ({
+export const productDetailTitleDescription = (theme: Theme) => ({
 	display: 'flex',
 	flexDirection: 'column',
 	width: '25%',
 	padding: '10px',
-	backgroundColor: 'white',
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
 	'@media (max-width:1024px)': {
 		width: 'calc(100% -  12px)',
 		padding: '6px',
@@ -48,6 +109,7 @@ export const productDetailImg = () => ({
 	boxShadow: '0px 0px 4px 0px gray',
 	'@media (max-width:1024px)': {
 		width: 'calc(100% -  12px)',
+
 		height: '10%',
 		padding: '6px',
 	},
@@ -149,10 +211,11 @@ export const cartItemSelect = () => ({
 	},
 });
 
-export const cartPageCheckOut = () => ({
+export const cartPageCheckOut = (theme: Theme) => ({
 	width: '40%',
 	border: '1px solid gray',
-	backgroundColor: 'white',
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
 	height: '20%',
 	margin: '20px',
 	'@media (max-width:1024px)': {
@@ -174,9 +237,10 @@ export const logInFormOuter = () => ({
 		paddingLeft: '10px',
 	},
 });
-export const signInButtonStyle = () => ({
+export const signInButtonStyle = (theme: Theme) => ({
 	width: '150px',
-	backgroundColor: 'black',
+	backgroundColor: theme.palette.text.primary,
+	color: theme.palette.background.paper,
 	marginTop: '10px',
 	height: '50px',
 	fontWeight: 'bold',
@@ -214,10 +278,11 @@ export const placeOrderOuter = () => ({
 	},
 });
 
-export const placeOrderCheckOut = () => ({
+export const placeOrderCheckOut = (theme: Theme) => ({
 	flex: 1,
 	border: '1px solid gray',
-	backgroundColor: 'white',
+	backgroundColor: theme.palette.background.paper,
+	color: theme.palette.text.primary,
 	height: '20%',
 	margin: '20px',
 	'@media (max-width:1024px)': {
@@ -225,8 +290,7 @@ export const placeOrderCheckOut = () => ({
 		width: 'calc(100% -  10px)',
 
 		margin: '0px',
-		padding:'4px',
-
+		padding: '4px',
 	},
 });
 
@@ -289,4 +353,3 @@ export const placeOrderCartItemPrice = () => ({
 		width: '100%',
 	},
 });
-

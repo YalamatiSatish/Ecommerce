@@ -30,6 +30,8 @@ import {
 	cartItemSelect,
 } from './style';
 import { cartItemType } from '../../types/cart';
+import { buttonStyle } from './style';
+
 /* import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -198,7 +200,7 @@ const CartPage = (/* props: Props */) => {
 							onClick={() => {
 								removeItemsFromCart(Number(cartItem?._id));
 							}}
-							sx={{ color: 'black' }}
+							sx={{ color: 'inherit' }}
 						/>
 					</CustomToolTip>
 				</Button>
@@ -300,13 +302,7 @@ const CartPage = (/* props: Props */) => {
 				>
 					<Button
 						variant='contained'
-						sx={{
-							backgroundColor: '#00121A',
-							color: 'white',
-							padding: '10px 30px',
-							fontWeight: 700,
-							maxWidth: '80%',
-						}}
+						sx={buttonStyle}
 						disabled={cartItems?.length === 0}
 						onClick={() => handleCheckOut()}
 					>

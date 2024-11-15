@@ -24,16 +24,16 @@ import {
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { handleLogOutUser, handleModeChange } from '../store/user/slice';
+import { handleLogOutUser } from '../store/user/slice';
 import { useAppDispatch } from '../store';
 import { Link } from 'react-router-dom';
 //import { handleChangeMode } from '../store/products/slice';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+//import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import CustomToolTip from './ToolTip';
 import { HeaderOuterStyle, searchHeader } from './style';
-
+import { handleModeChange } from '../store/theme/slice';
 /* const StyledToolbar = styled(Toolbar)({
 	display: 'flex',
 	justifyContent: 'space-between',
@@ -87,6 +87,7 @@ const ToggleSwitch = styled(Switch)(({ theme }) => ({
 
 const HeaderNew = () => {
 	const { userloginDetails } = useSelector((state: RootState) => state.userLogin);
+	const { darkMode } = useSelector((state: RootState) => state.theme);
 	const dispatch = useAppDispatch();
 
 	const [openMenuProfile, setOpenMenuProfile] = useState<boolean>(false);
@@ -95,12 +96,14 @@ const HeaderNew = () => {
 		setDarkMode(!darkMode);
 	}; */
 	const [checked, setChecked] = React.useState(false);
+	React.useEffect(() => {
+		setChecked(darkMode);
+	}, [darkMode]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setChecked(event.target.checked);
 		dispatch(handleModeChange());
 	};
-
 
 	return (
 		<AppBar position='sticky'>
@@ -110,49 +113,43 @@ const HeaderNew = () => {
 					sx={{ display: { xs: 'none', sm: 'block' } /* backgroundColor: ''  */ }}
 				>
 					{' '}
-					<Link to='/' style={{ textDecoration: 'none' /* color: 'white'  */ }}>
+					<Link
+						to='/'
+						style={{ textDecoration: 'none', color: 'inherit' /* color: 'white'  */ }}
+					>
 						PROSHOP
 					</Link>
 				</Typography>
-				<Link to='/' style={{ textDecoration: 'none' /*  color: 'white' */ }}>
+				<Link
+					to='/'
+					style={{ textDecoration: 'none', color: 'inherit' /*  color: 'white' */ }}
+				>
 					<StoreIcon
 						sx={{ display: { xs: 'block', sm: 'none' } /* backgroundColor: ''  */ }}
 					/>
 				</Link>
-				<Box sx={searchHeader} >
+				<Box sx={searchHeader}>
 					<InputBase placeholder='Search ...' />{' '}
 				</Box>
 				<Icons>
-					{/* <Badge badgeContent={4} color='error'>
-						<MailIcon />
-					</Badge>
-					<Badge badgeContent={17} color='error'>
-						<NotificationsIcon />
-					</Badge> */}
 					<Badge badgeContent={0} color='error'>
-						<Link to='/cart' style={{ textDecoration: 'none' /* color: 'white' */ }}>
+						<Link
+							to='/cart'
+							style={{
+								textDecoration: 'none',
+								color: 'inherit',
+							}}
+						>
 							<ShoppingCartIcon />
 						</Link>
 					</Badge>
-					{userloginDetails !== null ? (
-						<Avatar
-							alt='Satish Sharp'
-							src='../../public/Images/playstation.jpg'
-							sx={{ width: '30px', height: '30px' }}
-							onClick={() => setOpenMenuProfile(true)}
-						/>
-					) : (
-						<Link to='/login' style={{ textDecoration: 'none' /* color: 'white' */ }}>
-							<PersonIcon />
-						</Link>
-					)}
 				</Icons>
-				{userloginDetails !== null ? (
+				{/* {userloginDetails !== null ? (
 					<UserBox onClick={() => setOpenMenuProfile(true)}>
 						<Avatar
 							alt='Satish Sharp'
 							src='../../public/Images/playstation.jpg'
-							sx={{ width: '30px', height: '30px' }}
+							sx={{ width: '30px', height: '30px', color: 'inherit' }}
 						/>
 						<Typography>Satish</Typography>
 					</UserBox>
@@ -161,11 +158,11 @@ const HeaderNew = () => {
 						<Avatar
 							alt='Satish Sharp'
 							src='../../public/Images/playstation.jpg'
-							sx={{ width: '30px', height: '30px' }}
+							sx={{ width: '30px', height: '30px', color: 'inherit' }}
 						/>
 						<Typography>Satish</Typography>
 					</UserBox>
-				)}
+				)} */}
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
 					<ToggleSwitch
 						color='default'
@@ -185,55 +182,60 @@ const HeaderNew = () => {
 						)
 					}{' '}
 				</Box>
-				{/* <Switch
-						color='default'
-						sx={{ color: 'white' }}
-						checked={checked}
-						onChange={handleChange}
-					/> */}
+				{userloginDetails !== null ? (
+					<Avatar
+						alt='Satish Sharp'
+						src='../../public/Images/playstation.jpg'
+						sx={{ width: '30px', height: '30px', color: 'inherit' }}
+						onClick={() => setOpenMenuProfile(true)}
+					/>
+				) : (
+					<Link to='/login' style={{ textDecoration: 'none', color: 'inherit' }}>
+						<PersonIcon />
+					</Link>
+				)}
+				{userloginDetails !== null ? (
+					<Menu
+						id='demo-positioned-menu'
+						aria-labelledby='demo-positioned-button'
+						open={openMenuProfile}
+						onClick={() => setOpenMenuProfile(false)}
+						onClose={() => setOpenMenuProfile(false)}
+						anchorOrigin={{
+							vertical: 'top',
+							horizontal: 'right',
+						}}
+						/* transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}} */
+						sx={{ marginTop: '40px' }}
+					>
+						<MenuItem>Profile</MenuItem>
+						<MenuItem>My Cart</MenuItem>
+						<MenuItem>Logout</MenuItem>
+					</Menu>
+				) : (
+					<Menu
+						id='demo-positioned-menu'
+						aria-labelledby='demo-positioned-button'
+						open={openMenuProfile}
+						onClick={() => setOpenMenuProfile(false)}
+						onClose={() => setOpenMenuProfile(false)}
+						anchorOrigin={{
+							vertical: 'top',
+							horizontal: 'right',
+						}}
+						transformOrigin={{
+							vertical: 'top',
+							horizontal: 'left',
+						}}
+						sx={{ marginTop: '30px' }}
+					>
+						<MenuItem>Log In</MenuItem>
+					</Menu>
+				)}
 			</Box>
-
-			{userloginDetails !== null ? (
-				<Menu
-					id='demo-positioned-menu'
-					aria-labelledby='demo-positioned-button'
-					open={openMenuProfile}
-					onClick={() => setOpenMenuProfile(false)}
-					onClose={() => setOpenMenuProfile(false)}
-					anchorOrigin={{
-						vertical: 'top',
-						horizontal: 'right',
-					}}
-					transformOrigin={{
-						vertical: 'top',
-						horizontal: 'left',
-					}}
-					sx={{ marginTop: '20px' }}
-				>
-					<MenuItem>Profile</MenuItem>
-					<MenuItem>My Cart</MenuItem>
-					<MenuItem>Logout</MenuItem>
-				</Menu>
-			) : (
-				<Menu
-					id='demo-positioned-menu'
-					aria-labelledby='demo-positioned-button'
-					open={openMenuProfile}
-					onClick={() => setOpenMenuProfile(false)}
-					onClose={() => setOpenMenuProfile(false)}
-					anchorOrigin={{
-						vertical: 'top',
-						horizontal: 'right',
-					}}
-					transformOrigin={{
-						vertical: 'top',
-						horizontal: 'left',
-					}}
-					sx={{ marginTop: '30px' }}
-				>
-					<MenuItem>Log In</MenuItem>
-				</Menu>
-			)}
 		</AppBar>
 	);
 };
