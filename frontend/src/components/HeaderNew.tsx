@@ -100,9 +100,15 @@ const HeaderNew = () => {
 		setChecked(darkMode);
 	}, [darkMode]);
 
+	// Toggle change for theme
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setChecked(event.target.checked);
 		dispatch(handleModeChange());
+	};
+
+	// Logout functionality for user
+	const handleLogout = () => {
+		dispatch(handleLogOutUser());
 	};
 
 	return (
@@ -131,7 +137,7 @@ const HeaderNew = () => {
 				<Box sx={searchHeader}>
 					<InputBase placeholder='Search ...' />{' '}
 				</Box>
-				<Icons>
+				{/* <Icons>
 					<Badge badgeContent={0} color='error'>
 						<Link
 							to='/cart'
@@ -143,56 +149,56 @@ const HeaderNew = () => {
 							<ShoppingCartIcon />
 						</Link>
 					</Badge>
-				</Icons>
-				{/* {userloginDetails !== null ? (
-					<UserBox onClick={() => setOpenMenuProfile(true)}>
-						<Avatar
-							alt='Satish Sharp'
-							src='../../public/Images/playstation.jpg'
-							sx={{ width: '30px', height: '30px', color: 'inherit' }}
-						/>
-						<Typography>Satish</Typography>
-					</UserBox>
-				) : (
-					<UserBox onClick={() => setOpenMenuProfile(true)}>
-						<Avatar
-							alt='Satish Sharp'
-							src='../../public/Images/playstation.jpg'
-							sx={{ width: '30px', height: '30px', color: 'inherit' }}
-						/>
-						<Typography>Satish</Typography>
-					</UserBox>
-				)} */}
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+				</Icons> */}
+				<Badge badgeContent={0} color='error'>
+					<Link
+						to='/cart'
+						style={{
+							textDecoration: 'none',
+							color: 'inherit',
+						}}
+					>
+						<ShoppingCartIcon />
+					</Link>
+				</Badge>
+
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+					}}
+				>
 					<ToggleSwitch
 						color='default'
 						//sx={{ color: 'white' }}
 						checked={checked}
 						onChange={handleChange}
 					></ToggleSwitch>
-					{
-						/* theme.palette.mode === 'dark' */ !checked ? (
-							<CustomToolTip title={'Light Mode'} /* 	 */>
-								<LightModeOutlinedIcon />
-							</CustomToolTip>
-						) : (
-							<CustomToolTip title={'Dark mode'}>
-								<Brightness4Icon />
-							</CustomToolTip>
-						)
-					}{' '}
+					{!checked ? (
+						<CustomToolTip title={'Light Mode'}>
+							<LightModeOutlinedIcon />
+						</CustomToolTip>
+					) : (
+						<CustomToolTip title={'Dark mode'}>
+							<Brightness4Icon />
+						</CustomToolTip>
+					)}
 				</Box>
 				{userloginDetails !== null ? (
 					<Avatar
 						alt='Satish Sharp'
 						src='../../public/Images/playstation.jpg'
-						sx={{ width: '30px', height: '30px', color: 'inherit' }}
-						onClick={() => setOpenMenuProfile(true)}
+						sx={{ width: '30px', height: '30px', color: 'inherit', cursor: 'pointer' }}
+						onClick={() => setOpenMenuProfile(!openMenuProfile)}
 					/>
 				) : (
-					<Link to='/login' style={{ textDecoration: 'none', color: 'inherit' }}>
+					<PersonIcon
+						sx={{ cursor: 'pointer' }}
+						onClick={() => setOpenMenuProfile(!openMenuProfile)}
+					/>
+					/* <Link to='/login' style={{ textDecoration: 'none', color: 'inherit', cursor:'pointer' }}>
 						<PersonIcon />
-					</Link>
+					</Link> */
 				)}
 				{userloginDetails !== null ? (
 					<Menu
@@ -211,9 +217,15 @@ const HeaderNew = () => {
 							}} */
 						sx={{ marginTop: '40px' }}
 					>
-						<MenuItem>Profile</MenuItem>
-						<MenuItem>My Cart</MenuItem>
-						<MenuItem>Logout</MenuItem>
+						<Link to='/profile' style={{ textDecoration: 'none', color: 'inherit' }}>
+							<MenuItem>Profile</MenuItem>
+						</Link>
+						<Link to='/cart' style={{ textDecoration: 'none', color: 'inherit' }}>
+							<MenuItem>My Cart</MenuItem>
+						</Link>
+						<Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+							<MenuItem onClick={handleLogout}>Logout</MenuItem>
+						</Link>
 					</Menu>
 				) : (
 					<Menu
@@ -232,7 +244,9 @@ const HeaderNew = () => {
 						}}
 						sx={{ marginTop: '30px' }}
 					>
-						<MenuItem>Log In</MenuItem>
+						<Link to='/login' style={{ textDecoration: 'none', color: 'inherit' }}>
+							<MenuItem>Log In</MenuItem>
+						</Link>
 					</Menu>
 				)}
 			</Box>

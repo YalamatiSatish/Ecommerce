@@ -107,12 +107,12 @@ const ShippingPage = () => {
 	};
 	return (
 		<Box
-			sx={{
+			/* sx={{
 				width: '100%',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
-			}}
+			}} */
 		>
 			{loading === 'loading' ? (
 				<Loader />

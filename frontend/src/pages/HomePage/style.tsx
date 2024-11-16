@@ -230,11 +230,12 @@ export const cartPageCheckOut = (theme: Theme) => ({
 export const logInFormOuter = () => ({
 	display: 'flex',
 	flexDirection: 'column',
-	width: '100%',
+	width: '40%',
 	paddingLeft: '140px',
 	marginTop: '20px',
 	'@media (max-width:1024px)': {
-		paddingLeft: '10px',
+		padding: '10px',
+		width: '100%',
 	},
 });
 export const signInButtonStyle = (theme: Theme) => ({
@@ -275,6 +276,7 @@ export const placeOrderOuter = () => ({
 	flex: 3,
 	'@media (max-width:1024px)': {
 		width: '100%',
+		paddingLeft:'10px'
 	},
 });
 
@@ -286,11 +288,11 @@ export const placeOrderCheckOut = (theme: Theme) => ({
 	height: '20%',
 	margin: '20px',
 	'@media (max-width:1024px)': {
-		//width: '100%',
-		width: 'calc(100% -  10px)',
+		width: '100%',
+		//width: 'calc(100% -  20px)',
 
 		margin: '0px',
-		padding: '4px',
+		//padding: '4px',
 	},
 });
 

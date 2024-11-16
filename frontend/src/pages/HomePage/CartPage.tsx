@@ -224,8 +224,7 @@ const CartPage = (/* props: Props */) => {
 				{cartItems?.length === 0 && (
 					<Box
 						sx={{
-							backgroundColor: 'lightblue',
-							color: 'white',
+							color: 'inherit',
 							fontWeight: 'bold',
 							padding: '14px',
 						}}

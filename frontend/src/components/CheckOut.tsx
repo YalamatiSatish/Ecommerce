@@ -66,7 +66,7 @@ const CheckOut = ({ step: step }: CheckOutprop) => {
 	};
 
 	return (
-		<Box sx={{ width: '98%' }}>
+		<Box sx={{ width: '88%' }}>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label /* index */) => {
 					const stepProps: { completed?: boolean } = {};
@@ -85,7 +85,7 @@ const CheckOut = ({ step: step }: CheckOutprop) => {
 							{...stepProps}
 							sx={{
 								margin: '0px',
-								padding: '0px',
+								padding: '10px 0px 10px 4px',
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center',

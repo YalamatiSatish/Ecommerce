@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Box } from '@mui/material';
-import HeaderNew from './components/HeaderNew';
 import Footer from './components/Footer';
 import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,6 +12,7 @@ import { theme, darkTheme } from './bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { mainStyle } from './pages/HomePage/style';
+import HeaderNew from './components/HeaderNew';
 
 function App() {
 	const { darkMode } = useSelector((state: RootState) => state.theme);
